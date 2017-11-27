@@ -565,3 +565,57 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
+
+/**
+ * 分页
+*/
+function pagination() {
+	global $wp_query;
+	$big = 999999999; // need an unlikely integer
+	echo '<style>
+					#paginationxx{
+						position: relative;
+						float: left;
+						right: 50%;
+					}
+					#paginationxx>:first-child{
+						margin-left: 0;
+						border-top-left-radius: 4px;
+						border-bottom-left-radius: 4px;
+					}
+					#paginationxx>:last-child{
+						border-top-right-radius: 4px;
+				    border-bottom-right-radius: 4px
+					}
+					#paginationxx>span,
+					#paginationxx>a{
+						position: relative;
+				    float: left;
+				    padding: 6px 12px;
+				    margin-left: -1px;
+				    line-height: 1.42857143;
+				    color: #337ab7;
+				    text-decoration: none;
+				    background-color: #fff;
+				    border: 1px solid #ddd;
+					}
+					#paginationxx>span{
+						color:black;
+					}
+	</style>';
+	echo '<div style="
+    position: relative;
+    float: left;
+    left: 50%;
+		"><div id="paginationxx">';
+	// https://codex.wordpress.org/Function_Reference/paginate_links
+	echo paginate_links( array(
+	  'prev_text'          => __('上一页'),
+	  'next_text'          => __('下一页'),
+		'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+		'format' => '?paged=%#%',
+		'current' => max( 1, get_query_var('paged') ),
+		'total' => $wp_query->max_num_pages
+	) );
+	echo '</div></div>';
+}

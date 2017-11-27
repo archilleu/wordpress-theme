@@ -192,6 +192,7 @@ get_header(); ?>
 		<a href="<?php echo get_category_link( $thisCat->term_id ) ?>" alt="">查看全部&gt;&gt;</a>
 		<div class="col-md-12 col-xs-12 news-excerpt">
 			<!-- https://codex.wordpress.org/Class_Reference/WP_Query	 -->
+			<!-- https://www.wpzhiku.com/all-wp_query-arguments-comments/ -->
 			<?php
 			// the query
 			$args = array(
