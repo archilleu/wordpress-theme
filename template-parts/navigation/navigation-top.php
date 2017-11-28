@@ -15,6 +15,9 @@
 		<div class="logo"><?php the_custom_logo(); ?></div>
 
 		<ul class="nav-response left">
+			<li>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">首页</a>
+			</li>
 			<?php
 			$args=array(
 				'hide_empty'=>false,
