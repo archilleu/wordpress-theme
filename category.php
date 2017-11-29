@@ -24,32 +24,65 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-		<?php
-		if ( have_posts() ) : ?>
+		<?php if ( have_posts() ) : ?>
+			<?php while ( have_posts() ) : the_post(); ?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<header class="entry-header">
+					<?php
+					if ( 'post' === get_post_type() ) {
+						echo '<div class="entry-meta">';
+						echo '<span>发布于:</span>';
+						the_date('Y-m-d', '<span>', '</span>');
+						echo '<span>';
+						the_time('G:i');
+						echo '</span>';
+						edit_post_link();
+						echo '</div><!-- .entry-meta -->';
+					};
+
+					the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' );
+					?>
+				</header><!-- .entry-header -->
+
+				<?php if ( '' !== get_the_post_thumbnail() ) : ?>
+					<div class="post-thumbnail">
+						<a href="<?php the_permalink(); ?>">
+							<?php the_post_thumbnail( 'thumbnail' ); ?>
+						</a>
+					</div><!-- .post-thumbnail -->
+				<?php endif; ?>
+
+				<div class="entry-content">
+					<?php
+					/* translators: %s: Name of current post */
+					the_excerpt();
+
+					?>
+				</div><!-- .entry-content -->
+				<div class="clearfix"></div>
+
+				<?php
+				if ( is_single() ) {
+					twentyseventeen_entry_footer();
+				}
+				?>
+
+				</article><!-- #post-## -->
+			<?php endwhile; ?>
+
 			<?php
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+			echo "<div class='pagination-center'>";
+			the_posts_pagination(
+				array(
+				'prev_text' => '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
+				'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>')
+			);
+			echo "</div>";
+			?>
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/post/content', get_post_format() );
-
-			endwhile;
-
-			the_posts_pagination( array(
-				'prev_text' => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
-				'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
-			) );
-
-		else :
-
-			echo "<div class='cotent-none'>没有相关内容</div>";
-
-		endif; ?>
+		<?php else : ?>
+			<div class='cotent-none'>没有相关内容</div>
+		<?php endif; ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

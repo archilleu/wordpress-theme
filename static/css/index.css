@@ -22,10 +22,11 @@
   text-align: center;
   line-height: 98px;
   position: relative;
-  background: url(<?php echo get_template_directory_uri(); ?>/static/images/index/pb-wrapper-line.png) no-repeat center right;
+  background: url(../images/index/pb-wrapper-line.png) no-repeat center right;
 }
 .index-main .content>ul>li:hover {
 	background-color: white;
+  background-image: none;
 }
 .index-main .content>ul>li:last-child {
 	background-image: none;
