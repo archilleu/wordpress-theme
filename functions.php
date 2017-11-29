@@ -692,7 +692,7 @@ function company_auto_excerpt_more($more) {
 }
 
 add_filter('excerpt_more', 'company_auto_excerpt_more');
-//需要调用twentyeleven_continue_reading_link()函数
+//需要调用company_continue_reading_link()函数
 function company_custom_excerpt_more($output) {
     if (has_excerpt() && !is_attachment()) {
         $output .= company_continue_reading_link();

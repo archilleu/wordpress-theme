@@ -15,106 +15,8 @@
  * @version 1.0
  */
 
+includeLinkStyle(get_template_directory_uri().'/static/css/index.css');
 get_header(); ?>
-
-<style media="screen">
-
-		.index-main .content {
-			width: 100%;
-    	height: 98px;
-    	background: #dd1f32;
-    	position: relative;
-    	z-index: 9;
-			margin-top: -1px;
-		}
-
-		.index-main .content>ul {
-			padding: 0;
-			margin: 0;
-			list-style: none;
-			width: 100%;
-			height: 100%;
-			position: relative;
-		}
-		.index-main .content>ul>li {
-			float: left;
-	    width: 190px;
-	    height: 100%;
-	    text-align: center;
-	    line-height: 98px;
-	    position: relative;
-	    background: url(<?php echo get_template_directory_uri(); ?>/static/images/index/pb-wrapper-line.png) no-repeat center right;
-		}
-		.index-main .content>ul>li:hover {
-			background-color: white;
-		}
-		.index-main .content>ul>li:last-child {
-			background-image: none;
-		}
-
-		.index-main .content>ul>li:hover>a>span,
-		.index-main .content>ul>li:hover>a {
-			color: #dd1f32;
-			text-decoration: none;
-		}
-
-		.index-main .content>ul>li>a {
-			color: #fff;
-	    width: 100%;
-	    height: 100%;
-			font-size: 20px;
-		}
-		.index-main .content>ul>li>a>span {
-			margin-right: 8px;
-			position: relative;
-			top: 3px
-		}
-
-		.news-express {
-			position: relative;
-			margin: 40px 0 90px 0;
-		}
-
-		.news-express .title {
-			font-size: 30px;
-	    width: 100%;
-	    text-align: center;
-	    color: #333;
-	    font-weight: 700;
-		}
-		.news-express .title>span{
-			display: block;
-	    font-size: 16px;
-	    margin-top: 20px;
-	    font-weight: 400;
-	    text-align: center;
-		}
-
-		.news-express>a {
-			position: absolute;
-	    right: 15px;
-	    color: #dc1e32;
-	    top: 96px;
-	    padding-bottom: 1px;
-			font-size: 18px;
-		}
-
-		.news-express .news-excerpt {
-			margin: 45px 0 0 0;
-		}
-
-		.news-express .news-excerpt .news-item .thumbnail{
-			height: 360px;
-		}
-		.news-express .news-excerpt .news-item .thumbnail img{
-			height: 50%;
-		}
-
-		.news-express .news-excerpt .news-item .thumbnail .caption>a{
-			color: red;
-		}
-
-</style>
 
 <div class="index-main">
 	<div class="row shortcut">
@@ -215,7 +117,7 @@ get_header(); ?>
 								<!-- 标题 -->
 								<h4><?php the_title(); ?></h4>
 								<!-- 摘要 -->
-								<?php the_excerpt(); ?><a href="<?php echo get_permalink(); ?>"> [ 详情 ]</a>
+								<?php the_excerpt(); ?>
 				      </div>
 				    </div>
 				  </div>
