@@ -674,3 +674,30 @@ function includeLinkStyle($url) {
 			</script>
 		';
 }
+
+/*
+ * 摘要
+*/
+function company_excerpt_length( $length ) {
+    return 70;
+}
+add_filter( 'excerpt_length', 'company_excerpt_length' );
+
+function company_continue_reading_link() {
+    return ' <a href="' . esc_url(get_permalink()) . '">' . __('[ 详情 ]') . '</a>';
+}
+
+function company_auto_excerpt_more($more) {
+    return ' &hellip;' . company_continue_reading_link();
+}
+
+add_filter('excerpt_more', 'company_auto_excerpt_more');
+//需要调用twentyeleven_continue_reading_link()函数
+function company_custom_excerpt_more($output) {
+    if (has_excerpt() && !is_attachment()) {
+        $output .= company_continue_reading_link();
+    }
+    return $output;
+}
+
+add_filter('get_the_excerpt', 'company_custom_excerpt_more');
