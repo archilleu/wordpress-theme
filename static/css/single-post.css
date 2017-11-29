@@ -1,0 +1,27 @@
+/*
+ * content
+*/
+.wrap {
+  padding: 10px;
+  margin: 0 0 50px 0;
+}
+article {
+  padding: 20px;
+}
+article header {
+  margin-bottom: 10px;
+}
+article header .entry-meta {
+  text-align: right;
+}
+article header .entry-meta span {
+  margin-right: 5px;
+}
+
+article .entry-content .content {
+  padding: 20px 0 30px 0;
+}
+
+article .entry-content .nav-back a{
+  color: red;
+}
