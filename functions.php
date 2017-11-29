@@ -567,6 +567,18 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
 
 /**
+ * 上下文章导航
+*/
+function post_pagination() {
+		the_post_navigation( array(
+			'in_same_term' => true,
+			'prev_text' => '<span>' . __( '上一篇').'</span>' ,
+			'next_text' => '<span>' . __( '下一篇').'</span>'
+		) );
+
+		return;
+}
+/**
  * 分页
 */
 function pagination() {
@@ -574,8 +586,8 @@ function pagination() {
 		the_posts_pagination(
 			array(
 			'mid_size' => 2,
-			'prev_text' => '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
-			'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>')
+			'prev_text' => '<span>' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
+			'next_text' => '<span>' . __( 'Next page', 'twentyseventeen' ) . '</span>')
 		);
 		echo "</div>";
 	// /*导航居中 样式*/
