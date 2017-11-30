@@ -1,0 +1,41 @@
+#guestbook {
+  margin: 30px 0 50px 0;
+  padding: 0 30%;
+}
+
+#guestbook #reply-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+#guestbook .logged-in-as {
+    text-align: right;
+}
+
+#guestbook form {
+  margin: 25px 0 0 0;
+}
+
+#guestbook .comment-notes {
+    font-size: 12px;
+}
+
+#guestbook textarea {
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+#guestbook .form-submit {
+  text-align: right;
+}
+
+#guestbook .btn-primary {
+  margin-right: 10px;
+}
+
+#guestbook .tips {
+  margin: 20px 0 0 0;
+  padding: 15px 15px 5px 15px;
+  border: 1px solid rgba(125, 125, 125, .2);
+  border-radius: 10px;
+}
