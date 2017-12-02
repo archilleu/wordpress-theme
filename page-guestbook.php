@@ -18,6 +18,34 @@ get_header(); ?>
 
 <?php if ( post_password_required() ): ?>
 <?php endif ?>
+
+<?php
+	$args = array(
+		'number' => '5',
+	);
+	$comments = get_comments($args);
+?>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="comments-list">
+			<div class="title">公共留言板</div>
+			<ul>
+			<?php foreach($comments as $comment) : ?>
+				<li>
+				 	<p><?php echo $comment->comment_content; ?></p>
+						<div>
+						 	<span>用户:<?php echo $comment->comment_author; ?></span>
+						 	<span>邮箱:<?php echo $comment->comment_author_email; ?></span>
+						 	<span>日期:<?php echo $comment->comment_date; ?></span>
+						</div>
+				</li>
+			<?php endforeach;?>
+			</ul>
+		</div>
+	</div>
+</div>
+
 <div id="comments" class="row comments-area">
 	<div class="col-md-12" id="guestbook">
 	<?php
@@ -56,7 +84,7 @@ get_header(); ?>
 	  'label_submit'=>__('提交'),
 		'class_submit'=> 'btn btn-primary',
 	  // change the title of the reply section
-	  'title_reply'=>_('公众留言'),
+	  'title_reply'=>_('留言'),
 	  // redefine your own textarea (the comment body)
 	  'comment_field' => '<div class="comment-form-comment"><label for="comment">' . _x( '留言 *', 'noun' ) . '</label>
 		<br /><textarea class="form-control" row="3" id="comment" name="comment" aria-required="true"></textarea></div>',
