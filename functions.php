@@ -1,716 +1,333 @@
 <?php
 /**
- * Twenty Seventeen functions and definitions
+ * Twenty Nineteen functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
+ * @subpackage Twenty_Nineteen
+ * @since 1.0.0
  */
 
 /**
- * Twenty Seventeen only works in WordPress 4.7 or later.
+ * Twenty Nineteen only works in WordPress 4.7 or later.
  */
-if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
+if ( version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 	return;
 }
 
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
-function twentyseventeen_setup() {
-	/*
-	 * Make theme available for translation.
-	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/twentyseventeen
-	 * If you're building a theme based on Twenty Seventeen, use a find and replace
-	 * to change 'twentyseventeen' to the name of your theme in all the template files.
-	 */
-	load_theme_textdomain( 'twentyseventeen' );
-
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
-
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
-
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-	 */
-	add_theme_support( 'post-thumbnails' );
-
-	add_image_size( 'twentyseventeen-featured-image', 2000, 1200, true );
-
-	add_image_size( 'twentyseventeen-thumbnail-avatar', 100, 100, true );
-
-	// Set the default content width.
-	$GLOBALS['content_width'] = 525;
-
-	// This theme uses wp_nav_menu() in two locations.
-	register_nav_menus( array(
-		'top'    => __( 'Top Menu', 'twentyseventeen' ),
-		'social' => __( 'Social Links Menu', 'twentyseventeen' ),
-	) );
-
-	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'comment-form',
-		'comment-list',
-		'gallery',
-		'caption',
-	) );
-
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-		'gallery',
-		'audio',
-	) );
-
-	// Add theme support for Custom Logo.
-	add_theme_support( 'custom-logo', array(
-		'width'       => 250,
-		'height'      => 250,
-		'flex-width'  => true,
-	) );
-
-	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
-
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, and column width.
- 	 */
-	add_editor_style( array( 'assets/css/editor-style.css', twentyseventeen_fonts_url() ) );
-
-	// Define and register starter content to showcase the theme on new sites.
-	$starter_content = array(
-		'widgets' => array(
-			// Place three core-defined widgets in the sidebar area.
-			'sidebar-1' => array(
-				'text_business_info',
-				'search',
-				'text_about',
-			),
-
-			// Add the core-defined business info widget to the footer 1 area.
-			'sidebar-2' => array(
-				'text_business_info',
-			),
-
-			// Put two core-defined widgets in the footer 2 area.
-			'sidebar-3' => array(
-				'text_about',
-				'search',
-			),
-		),
-
-		// Specify the core-defined pages to create and add custom thumbnails to some of them.
-		'posts' => array(
-			'home',
-			'about' => array(
-				'thumbnail' => '{{image-sandwich}}',
-			),
-			'contact' => array(
-				'thumbnail' => '{{image-espresso}}',
-			),
-			'blog' => array(
-				'thumbnail' => '{{image-coffee}}',
-			),
-			'homepage-section' => array(
-				'thumbnail' => '{{image-espresso}}',
-			),
-		),
-
-		// Create the custom image attachments used as post thumbnails for pages.
-		'attachments' => array(
-			'image-espresso' => array(
-				'post_title' => _x( 'Espresso', 'Theme starter content', 'twentyseventeen' ),
-				'file' => 'assets/images/espresso.jpg', // URL relative to the template directory.
-			),
-			'image-sandwich' => array(
-				'post_title' => _x( 'Sandwich', 'Theme starter content', 'twentyseventeen' ),
-				'file' => 'assets/images/sandwich.jpg',
-			),
-			'image-coffee' => array(
-				'post_title' => _x( 'Coffee', 'Theme starter content', 'twentyseventeen' ),
-				'file' => 'assets/images/coffee.jpg',
-			),
-		),
-
-		// Default to a static front page and assign the front and posts pages.
-		'options' => array(
-			'show_on_front' => 'page',
-			'page_on_front' => '{{home}}',
-			'page_for_posts' => '{{blog}}',
-		),
-
-		// Set the front page section theme mods to the IDs of the core-registered pages.
-		'theme_mods' => array(
-			'panel_1' => '{{homepage-section}}',
-			'panel_2' => '{{about}}',
-			'panel_3' => '{{blog}}',
-			'panel_4' => '{{contact}}',
-		),
-
-		// Set up nav menus for each of the two areas registered in the theme.
-		'nav_menus' => array(
-			// Assign a menu to the "top" location.
-			'top' => array(
-				'name' => __( 'Top Menu', 'twentyseventeen' ),
-				'items' => array(
-					'link_home', // Note that the core "home" page is actually a link in case a static front page is not used.
-					'page_about',
-					'page_blog',
-					'page_contact',
-				),
-			),
-
-			// Assign a menu to the "social" location.
-			'social' => array(
-				'name' => __( 'Social Links Menu', 'twentyseventeen' ),
-				'items' => array(
-					'link_yelp',
-					'link_facebook',
-					'link_twitter',
-					'link_instagram',
-					'link_email',
-				),
-			),
-		),
-	);
-
+if ( ! function_exists( 'hoya_setup' ) ) :
 	/**
-	 * Filters Twenty Seventeen array of starter content.
+	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
-	 * @since Twenty Seventeen 1.1
-	 *
-	 * @param array $starter_content Array of starter content.
+	 * Note that this function is hooked into the after_setup_theme hook, which
+	 * runs before the init hook. The init hook is too late for some features, such
+	 * as indicating support for post thumbnails.
 	 */
-	$starter_content = apply_filters( 'twentyseventeen_starter_content', $starter_content );
+	function hoya_setup() {
+		/*
+		 * Make theme available for translation.
+		 * Translations can be filed in the /languages/ directory.
+		 * If you're building a theme based on Twenty Nineteen, use a find and replace
+		 * to change 'twentynineteen' to the name of your theme in all the template files.
+		 */
+		load_theme_textdomain( 'twentynineteen', get_template_directory() . '/languages' );
 
-	add_theme_support( 'starter-content', $starter_content );
-}
-add_action( 'after_setup_theme', 'twentyseventeen_setup' );
+		// Add default posts and comments RSS feed links to head.
+		add_theme_support( 'automatic-feed-links' );
 
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function twentyseventeen_content_width() {
+		/*
+		 * Let WordPress manage the document title.
+		 * By adding theme support, we declare that this theme does not use a
+		 * hard-coded <title> tag in the document head, and expect WordPress to
+		 * provide it for us.
+		 */
+		add_theme_support( 'title-tag' );
 
-	$content_width = $GLOBALS['content_width'];
+		/*
+		 * Enable support for Post Thumbnails on posts and pages.
+		 *
+		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+		 */
+		add_theme_support( 'post-thumbnails' );
+		set_post_thumbnail_size( 1568, 9999 );
 
-	// Get layout.
-	$page_layout = get_theme_mod( 'page_layout' );
-
-	// Check if layout is one column.
-	if ( 'one-column' === $page_layout ) {
-		if ( twentyseventeen_is_frontpage() ) {
-			$content_width = 644;
-		} elseif ( is_page() ) {
-			$content_width = 740;
-		}
-	}
-
-	// Check if is single post and there is no sidebar.
-	if ( is_single() && ! is_active_sidebar( 'sidebar-1' ) ) {
-		$content_width = 740;
-	}
-
-	/**
-	 * Filter Twenty Seventeen content width of the theme.
-	 *
-	 * @since Twenty Seventeen 1.0
-	 *
-	 * @param int $content_width Content width in pixels.
-	 */
-	$GLOBALS['content_width'] = apply_filters( 'twentyseventeen_content_width', $content_width );
-}
-add_action( 'template_redirect', 'twentyseventeen_content_width', 0 );
-
-/**
- * Register custom fonts.
- */
-function twentyseventeen_fonts_url() {
-	$fonts_url = '';
-
-	/*
-	 * Translators: If there are characters in your language that are not
-	 * supported by Libre Franklin, translate this to 'off'. Do not translate
-	 * into your own language.
-	 */
-	$libre_franklin = _x( 'on', 'Libre Franklin font: on or off', 'twentyseventeen' );
-
-	if ( 'off' !== $libre_franklin ) {
-		$font_families = array();
-
-		$font_families[] = 'Libre Franklin:300,300i,400,400i,600,600i,800,800i';
-
-		$query_args = array(
-			'family' => urlencode( implode( '|', $font_families ) ),
-			'subset' => urlencode( 'latin,latin-ext' ),
+		// This theme uses wp_nav_menu() in two locations.
+		register_nav_menus(
+			array(
+				'nav-menu' => __( '导航菜单', 'hoya' )
+				//可以增加其他菜单,这个会在管理台菜单管理显示
+			)
 		);
 
-		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-	}
-
-	return esc_url_raw( $fonts_url );
-}
-
-/**
- * Add preconnect for Google Fonts.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param array  $urls           URLs to print for resource hints.
- * @param string $relation_type  The relation type the URLs are printed.
- * @return array $urls           URLs to print for resource hints.
- */
-function twentyseventeen_resource_hints( $urls, $relation_type ) {
-	if ( wp_style_is( 'twentyseventeen-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
-		$urls[] = array(
-			'href' => 'https://fonts.gstatic.com',
-			'crossorigin',
+		/*
+		 * Switch default core markup for search form, comment form, and comments
+		 * to output valid HTML5.
+		 */
+		add_theme_support(
+			'html5',
+			array(
+				'search-form',
+				'comment-form',
+				'comment-list',
+				'gallery',
+				'caption',
+			)
 		);
-	}
 
-	return $urls;
-}
-add_filter( 'wp_resource_hints', 'twentyseventeen_resource_hints', 10, 2 );
+		/**
+		 * Add support for core custom logo.
+		 *
+		 * @link https://codex.wordpress.org/Theme_Logo
+		 */
+		add_theme_support(
+			'custom-logo',
+			array(
+				'height'      => 190,
+				'width'       => 190,
+				'flex-width'  => false,
+				'flex-height' => false,
+			)
+		);
+
+		// Add theme support for selective refresh for widgets.
+		add_theme_support( 'customize-selective-refresh-widgets' );
+
+		// Add support for Block Styles.
+		add_theme_support( 'wp-block-styles' );
+
+		// Add support for full and wide align images.
+		add_theme_support( 'align-wide' );
+
+		// Add support for editor styles.
+		add_theme_support( 'editor-styles' );
+
+		// Enqueue editor styles.
+		add_editor_style( 'style-editor.css' );
+
+		// Add custom editor font sizes.
+		add_theme_support(
+			'editor-font-sizes',
+			array(
+				array(
+					'name'      => __( 'Small', 'twentynineteen' ),
+					'shortName' => __( 'S', 'twentynineteen' ),
+					'size'      => 19.5,
+					'slug'      => 'small',
+				),
+				array(
+					'name'      => __( 'Normal', 'twentynineteen' ),
+					'shortName' => __( 'M', 'twentynineteen' ),
+					'size'      => 22,
+					'slug'      => 'normal',
+				),
+				array(
+					'name'      => __( 'Large', 'twentynineteen' ),
+					'shortName' => __( 'L', 'twentynineteen' ),
+					'size'      => 36.5,
+					'slug'      => 'large',
+				),
+				array(
+					'name'      => __( 'Huge', 'twentynineteen' ),
+					'shortName' => __( 'XL', 'twentynineteen' ),
+					'size'      => 49.5,
+					'slug'      => 'huge',
+				),
+			)
+		);
+
+		$default_hue     = twentynineteen_get_default_hue();
+		$saturation      = apply_filters( 'twentynineteen_custom_colors_saturation', 100 );
+		$lightness       = apply_filters( 'twentynineteen_custom_colors_lightness', 33 );
+		$lightness_hover = apply_filters( 'twentynineteen_custom_colors_lightness_hover', 23 );
+		// Editor color palette.
+		add_theme_support(
+			'editor-color-palette',
+			array(
+				array(
+					'name'  => __( 'Primary', 'twentynineteen' ),
+					'slug'  => 'primary',
+					'color' => twentynineteen_hsl_hex( 'default' === get_theme_mod( 'primary_color' ) ? $default_hue : get_theme_mod( 'primary_color_hue', $default_hue ), $saturation, $lightness ),
+				),
+				array(
+					'name'  => __( 'Secondary', 'twentynineteen' ),
+					'slug'  => 'secondary',
+					'color' => twentynineteen_hsl_hex( 'default' === get_theme_mod( 'primary_color' ) ? $default_hue : get_theme_mod( 'primary_color_hue', $default_hue ), $saturation, 23 ),
+				),
+				array(
+					'name'  => __( 'Dark Gray', 'twentynineteen' ),
+					'slug'  => 'dark-gray',
+					'color' => '#111',
+				),
+				array(
+					'name'  => __( 'Light Gray', 'twentynineteen' ),
+					'slug'  => 'light-gray',
+					'color' => '#767676',
+				),
+				array(
+					'name'  => __( 'White', 'twentynineteen' ),
+					'slug'  => 'white',
+					'color' => '#FFF',
+				),
+			)
+		);
+
+		// Add support for responsive embedded content.
+		add_theme_support( 'responsive-embeds' );
+	}
+endif;
+add_action( 'after_setup_theme', 'hoya_setup' );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function twentyseventeen_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Blog Sidebar', 'twentyseventeen' ),
-		'id'            => 'sidebar-1',
-		'description'   => __( 'Add widgets here to appear in your sidebar on blog posts and archive pages.', 'twentyseventeen' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+function twentynineteen_widgets_init() {
 
-	register_sidebar( array(
-		'name'          => __( 'Footer 1', 'twentyseventeen' ),
-		'id'            => 'sidebar-2',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'twentyseventeen' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Footer 2', 'twentyseventeen' ),
-		'id'            => 'sidebar-3',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'twentyseventeen' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-}
-add_action( 'widgets_init', 'twentyseventeen_widgets_init' );
-
-/**
- * Replaces "[...]" (appended to automatically generated excerpts) with ... and
- * a 'Continue reading' link.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param string $link Link to single post/page.
- * @return string 'Continue reading' link prepended with an ellipsis.
- */
-function twentyseventeen_excerpt_more( $link ) {
-	if ( is_admin() ) {
-		return $link;
-	}
-
-	$link = sprintf( '<p class="link-more"><a href="%1$s" class="more-link">%2$s</a></p>',
-		esc_url( get_permalink( get_the_ID() ) ),
-		/* translators: %s: Name of current post */
-		sprintf( __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ), get_the_title( get_the_ID() ) )
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer', 'twentynineteen' ),
+			'id'            => 'sidebar-1',
+			'description'   => __( 'Add widgets here to appear in your footer.', 'twentynineteen' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
 	);
-	return ' &hellip; ' . $link;
+
 }
-add_filter( 'excerpt_more', 'twentyseventeen_excerpt_more' );
+add_action( 'widgets_init', 'twentynineteen_widgets_init' );
 
 /**
- * Handles JavaScript detection.
+ * Set the content width in pixels, based on the theme's design and stylesheet.
  *
- * Adds a `js` class to the root `<html>` element when JavaScript is detected.
+ * Priority 0 to make it available to lower priority callbacks.
  *
- * @since Twenty Seventeen 1.0
+ * @global int $content_width Content width.
  */
-function twentyseventeen_javascript_detection() {
-	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
+function twentynineteen_content_width() {
+	// This variable is intended to be overruled from themes.
+	// Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+	$GLOBALS['content_width'] = apply_filters( 'twentynineteen_content_width', 640 );
 }
-add_action( 'wp_head', 'twentyseventeen_javascript_detection', 0 );
-
-/**
- * Add a pingback url auto-discovery header for singularly identifiable articles.
- */
-function twentyseventeen_pingback_header() {
-	if ( is_singular() && pings_open() ) {
-		printf( '<link rel="pingback" href="%s">' . "\n", get_bloginfo( 'pingback_url' ) );
-	}
-}
-add_action( 'wp_head', 'twentyseventeen_pingback_header' );
-
-/**
- * Display custom color CSS.
- */
-function twentyseventeen_colors_css_wrap() {
-	if ( 'custom' !== get_theme_mod( 'colorscheme' ) && ! is_customize_preview() ) {
-		return;
-	}
-
-	require_once( get_parent_theme_file_path( '/inc/color-patterns.php' ) );
-	$hue = absint( get_theme_mod( 'colorscheme_hue', 250 ) );
-?>
-	<style type="text/css" id="custom-theme-colors" <?php if ( is_customize_preview() ) { echo 'data-hue="' . $hue . '"'; } ?>>
-		<?php echo twentyseventeen_custom_colors_css(); ?>
-	</style>
-<?php }
-add_action( 'wp_head', 'twentyseventeen_colors_css_wrap' );
+add_action( 'after_setup_theme', 'twentynineteen_content_width', 0 );
 
 /**
  * Enqueue scripts and styles.
  */
-function twentyseventeen_scripts() {
-	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'twentyseventeen-fonts', twentyseventeen_fonts_url(), array(), null );
+function hoya_scripts() {
+	wp_enqueue_style( 'hoya-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 
-	// Theme stylesheet.
-	wp_enqueue_style( 'twentyseventeen-style', get_stylesheet_uri() );
+	//wp_style_add_data( 'hoya-style', 'rtl', 'replace' );
 
-	// Load the dark colorscheme.
-	if ( 'dark' === get_theme_mod( 'colorscheme', 'light' ) || is_customize_preview() ) {
-		wp_enqueue_style( 'twentyseventeen-colors-dark', get_theme_file_uri( '/assets/css/colors-dark.css' ), array( 'twentyseventeen-style' ), '1.0' );
+	if ( has_nav_menu( 'nav-menu' ) ) {
+		wp_enqueue_script( 'hoya-priority-menu', get_theme_file_uri( '/js/priority-menu.js' ), array('jquery'), '1.1', true );
+		wp_enqueue_script( 'hoya-touch-navigation', get_theme_file_uri( '/js/touch-keyboard-navigation.js' ), array(), '1.1', true );
 	}
 
-	// Load the Internet Explorer 9 specific stylesheet, to fix display issues in the Customizer.
-	if ( is_customize_preview() ) {
-		wp_enqueue_style( 'twentyseventeen-ie9', get_theme_file_uri( '/assets/css/ie9.css' ), array( 'twentyseventeen-style' ), '1.0' );
-		wp_style_add_data( 'twentyseventeen-ie9', 'conditional', 'IE 9' );
-	}
-
-	// Load the Internet Explorer 8 specific stylesheet.
-	wp_enqueue_style( 'twentyseventeen-ie8', get_theme_file_uri( '/assets/css/ie8.css' ), array( 'twentyseventeen-style' ), '1.0' );
-	wp_style_add_data( 'twentyseventeen-ie8', 'conditional', 'lt IE 9' );
-
-	// Load the html5 shiv.
-	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
-	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
-
-	wp_enqueue_script( 'twentyseventeen-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
-
-	$twentyseventeen_l10n = array(
-		'quote'          => twentyseventeen_get_svg( array( 'icon' => 'quote-right' ) ),
-	);
-
-	if ( has_nav_menu( 'top' ) ) {
-		wp_enqueue_script( 'twentyseventeen-navigation', get_theme_file_uri( '/assets/js/navigation.js' ), array( 'jquery' ), '1.0', true );
-		$twentyseventeen_l10n['expand']         = __( 'Expand child menu', 'twentyseventeen' );
-		$twentyseventeen_l10n['collapse']       = __( 'Collapse child menu', 'twentyseventeen' );
-		$twentyseventeen_l10n['icon']           = twentyseventeen_get_svg( array( 'icon' => 'angle-down', 'fallback' => true ) );
-	}
-
-	wp_enqueue_script( 'twentyseventeen-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
-
-	wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/assets/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
-
-	wp_localize_script( 'twentyseventeen-skip-link-focus-fix', 'twentyseventeenScreenReaderText', $twentyseventeen_l10n );
+	wp_enqueue_style( 'hoya-print-style', get_template_directory_uri() . '/print.css', array(), wp_get_theme()->get( 'Version' ), 'print' );
+	wp_enqueue_style( 'hoya-bootstrap-style', get_template_directory_uri() . '/bootstrap-3.3.7/css/bootstrap.min.css');
+	wp_enqueue_script( 'hoya-bootstrap-js', get_theme_file_uri( '/bootstrap-3.3.7/js/bootstrap.min.js' ), array(), '1.1', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'twentyseventeen_scripts' );
+add_action( 'wp_enqueue_scripts', 'hoya_scripts' );
 
 /**
- * Add custom image sizes attribute to enhance responsive image functionality
- * for content images.
+ * Fix skip link focus in IE11.
  *
- * @since Twenty Seventeen 1.0
+ * This does not enqueue the script because it is tiny and because it is only for IE11,
+ * thus it does not warrant having an entire dedicated blocking script being loaded.
  *
- * @param string $sizes A source size value for use in a 'sizes' attribute.
- * @param array  $size  Image size. Accepts an array of width and height
- *                      values in pixels (in that order).
- * @return string A source size value for use in a content image 'sizes' attribute.
+ * @link https://git.io/vWdr2
  */
-function twentyseventeen_content_image_sizes_attr( $sizes, $size ) {
-	$width = $size[0];
+function twentynineteen_skip_link_focus_fix() {
+	// The following is minified via `terser --compress --mangle -- js/skip-link-focus-fix.js`.
+	?>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	<?php
+}
+add_action( 'wp_print_footer_scripts', 'twentynineteen_skip_link_focus_fix' );
 
-	if ( 740 <= $width ) {
-		$sizes = '(max-width: 706px) 89vw, (max-width: 767px) 82vw, 740px';
+/**
+ * Enqueue supplemental block editor styles.
+ */
+function twentynineteen_editor_customizer_styles() {
+
+	wp_enqueue_style( 'twentynineteen-editor-customizer-styles', get_theme_file_uri( '/style-editor-customizer.css' ), false, '1.1', 'all' );
+
+	if ( 'custom' === get_theme_mod( 'primary_color' ) ) {
+		// Include color patterns.
+		require_once get_parent_theme_file_path( '/inc/color-patterns.php' );
+		wp_add_inline_style( 'twentynineteen-editor-customizer-styles', twentynineteen_custom_colors_css() );
+	}
+}
+add_action( 'enqueue_block_editor_assets', 'twentynineteen_editor_customizer_styles' );
+
+/**
+ * Display custom color CSS in customizer and on frontend.
+ */
+function twentynineteen_colors_css_wrap() {
+
+	// Only bother if we haven't customized the color.
+	if ( 'default' === get_theme_mod( 'primary_color', 'default' ) && ! twentynineteen_has_custom_default_hue() ) {
+		return;
 	}
 
-	if ( is_active_sidebar( 'sidebar-1' ) || is_archive() || is_search() || is_home() || is_page() ) {
-		if ( ! ( is_page() && 'one-column' === get_theme_mod( 'page_options' ) ) && 767 <= $width ) {
-			 $sizes = '(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px';
-		}
+	require_once get_parent_theme_file_path( '/inc/color-patterns.php' );
+
+	$primary_color = twentynineteen_get_default_hue();
+	if ( 'default' !== get_theme_mod( 'primary_color', 'default' ) ) {
+		$primary_color = get_theme_mod( 'primary_color_hue', $primary_color );
 	}
+	?>
 
-	return $sizes;
+	<style type="text/css" id="custom-theme-colors" <?php echo is_customize_preview() ? 'data-hue="' . absint( $primary_color ) . '"' : ''; ?>>
+		<?php echo twentynineteen_custom_colors_css(); ?>
+	</style>
+	<?php
 }
-add_filter( 'wp_calculate_image_sizes', 'twentyseventeen_content_image_sizes_attr', 10, 2 );
+add_action( 'wp_head', 'twentynineteen_colors_css_wrap' );
 
 /**
- * Filter the `sizes` value in the header image markup.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param string $html   The HTML image tag markup being filtered.
- * @param object $header The custom header object returned by 'get_custom_header()'.
- * @param array  $attr   Array of the attributes for the image tag.
- * @return string The filtered header image HTML.
+ * Default color filters.
  */
-function twentyseventeen_header_image_tag( $html, $header, $attr ) {
-	if ( isset( $attr['sizes'] ) ) {
-		$html = str_replace( $attr['sizes'], '100vw', $html );
-	}
-	return $html;
-}
-add_filter( 'get_header_image_tag', 'twentyseventeen_header_image_tag', 10, 3 );
+require get_template_directory() . '/inc/color-filters.php';
 
 /**
- * Add custom image sizes attribute to enhance responsive image functionality
- * for post thumbnails.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param array $attr       Attributes for the image markup.
- * @param int   $attachment Image attachment ID.
- * @param array $size       Registered image size or flat array of height and width dimensions.
- * @return string A source size value for use in a post thumbnail 'sizes' attribute.
+ * SVG Icons class.
  */
-function twentyseventeen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
-	if ( is_archive() || is_search() || is_home() ) {
-		$attr['sizes'] = '(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px';
-	} else {
-		$attr['sizes'] = '100vw';
-	}
-
-	return $attr;
-}
-add_filter( 'wp_get_attachment_image_attributes', 'twentyseventeen_post_thumbnail_sizes_attr', 10, 3 );
+require get_template_directory() . '/classes/class-twentynineteen-svg-icons.php';
 
 /**
- * Use front-page.php when Front page displays is set to a static page.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param string $template front-page.php.
- *
- * @return string The template to be used: blank if is_home() is true (defaults to index.php), else $template.
+ * Custom Comment Walker template.
  */
-function twentyseventeen_front_page_template( $template ) {
-	return is_home() ? '' : $template;
-}
-add_filter( 'frontpage_template',  'twentyseventeen_front_page_template' );
+require get_template_directory() . '/classes/class-twentynineteen-walker-comment.php';
 
 /**
- * Implement the Custom Header feature.
+ * Enhance the theme by hooking into WordPress.
  */
-require get_parent_theme_file_path( '/inc/custom-header.php' );
+require get_template_directory() . '/inc/template-functions.php';
 
 /**
- * Custom template tags for this theme.
+ * SVG Icons related functions.
  */
-require get_parent_theme_file_path( '/inc/template-tags.php' );
+require get_template_directory() . '/inc/icon-functions.php';
 
 /**
- * Additional features to allow styling of the templates.
+ * Custom template tags for the theme.
  */
-require get_parent_theme_file_path( '/inc/template-functions.php' );
+require get_template_directory() . '/inc/template-tags.php';
 
 /**
  * Customizer additions.
  */
-require get_parent_theme_file_path( '/inc/customizer.php' );
-
-/**
- * SVG icons functions and filters.
- */
-require get_parent_theme_file_path( '/inc/icon-functions.php' );
-
-/**
- * 上下文章导航
-*/
-function post_pagination() {
-		the_post_navigation( array(
-			'in_same_term' => true,
-			'prev_text' => '<span>' . __( '上一篇').'</span>' ,
-			'next_text' => '<span>' . __( '下一篇').'</span>'
-		) );
-
-		return;
-}
-/**
- * 分页
-*/
-function pagination() {
-		echo "<div class='pagination-center'>";
-		the_posts_pagination(
-			array(
-			'mid_size' => 2,
-			'prev_text' => '<span>' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
-			'next_text' => '<span>' . __( 'Next page', 'twentyseventeen' ) . '</span>')
-		);
-		echo "</div>";
-	// /*导航居中 样式*/
-	// .pagination-center {
-	//     position: relative;
-	//     float: left;
-	//     left: 50%;
-	// }
-	//
-	// .pagination {
-	// 	position: relative;
-	// 	float: left;
-	// 	right: 50%;
-	// }
-	//
-	// /*导航居中*/
-	// .pagination>h2 {
-	//   display: none;
-	// }
-	// .pagination .nav-links>:first-child {
-	// 	margin-left: 0;
-	// 	border-top-left-radius: 4px;
-	// 	border-bottom-left-radius: 4px;
-	// }
-	// .pagination .nav-links>:last-child {
-	// 	border-top-right-radius: 4px;
-	//   border-bottom-right-radius: 4px
-	// }
-	// .pagination .nav-links>span,
-	// .pagination .nav-links>a {
-	// 	position: relative;
-	//   float: left;
-	//   padding: 6px 12px;
-	//   margin-left: -1px;
-	//   line-height: 1.42857143;
-	//   color: #337ab7;
-	//   text-decoration: none;
-	//   background-color: #fff;
-	//   border: 1px solid #ddd;
-	// }
-	// .pagination .nav-links>span {
-	// 	color:black;
-	// }
-}
-
-/*
-* Define a constant path to our single template folder
-*/
-define(SINGLE_PATH, TEMPLATEPATH . '/single');
-
-/**
-* Filter the single_template with our custom function
-*/
-add_filter('single_template', 'my_single_template');
-
-/**
-* Single template function which will choose our template
-*/
-function my_single_template($single) {
-	global $wp_query, $post;
-
-	/**
-	* Checks for single template by category
-	* Check by category slug and ID
-	*/
-	foreach((array)get_the_category() as $cat) :
-
-		if(file_exists(SINGLE_PATH . '/single-cat-' . $cat->slug . '.php'))
-			return SINGLE_PATH . '/single-cat-' . $cat->slug . '.php';
-
-		elseif(file_exists(SINGLE_PATH . '/single-cat-' . $cat->term_id . '.php'))
-			return SINGLE_PATH . '/single-cat-' . $cat->term_id . '.php';
-
-		return $single;
-	endforeach;
-}
-/*
-*  End define a constant path to our single template folder
-*/
-
-/*
- * 添加css文件
-*/
-function includeLinkStyle($url) {
-		echo '
-			<script type="text/javascript">
-				function includeLinkStyle(url) {
-					var link = document.createElement("link");
-					link.rel = "stylesheet";
-					link.type = "text/css";
-					link.href = url;
-					var head = document.head || document.getElementsByTagName("head")[0];
-					head.appendChild(link);
-				}
-
-				includeLinkStyle("'.$url.'");
-			</script>
-		';
-}
-
-/*
- * 摘要
-*/
-function company_excerpt_length( $length ) {
-    return 70;
-}
-add_filter( 'excerpt_length', 'company_excerpt_length' );
-
-function company_continue_reading_link() {
-    return ' <a href="' . esc_url(get_permalink()) . '">' . __('[ 详情 ]') . '</a>';
-}
-
-function company_auto_excerpt_more($more) {
-    return ' &hellip;' . company_continue_reading_link();
-}
-
-add_filter('excerpt_more', 'company_auto_excerpt_more');
-//需要调用company_continue_reading_link()函数
-function company_custom_excerpt_more($output) {
-    if (has_excerpt() && !is_attachment()) {
-        $output .= company_continue_reading_link();
-    }
-    return $output;
-}
-
-add_filter('get_the_excerpt', 'company_custom_excerpt_more');
+require get_template_directory() . '/inc/customizer.php';

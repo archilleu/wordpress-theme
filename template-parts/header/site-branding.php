@@ -2,37 +2,58 @@
 /**
  * Displays header site branding
  *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
- * @version 1.0
+ * @package hoya
+ * @subpackage hoya
+ * @since 1.0.0
  */
-
 ?>
-<div class="site-branding">
-	<div class="wrap">
+<div class="site-branding row">
 
-		<?php the_custom_logo(); ?>
+	<div class="branding col-md-4">
+		<div class="site-logo">
+		<?php if ( has_custom_logo() ) : ?>
+			<?php the_custom_logo(); ?>
+		<?php else : ?>
+			没有设置logo
+		<?php endif; ?>
+		</div>
 
-		<div class="site-branding-text">
-			<?php if ( is_front_page() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php endif; ?>
+		<div class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+		<?php $blog_info = get_bloginfo( 'name' ); ?>
+		<?php if ( ! empty( $blog_info ) ) : ?>
+			<?php bloginfo( 'name' ); ?>
+		<?php else : ?>
+			<?php echo '浩亚信息科技有限公司'; ?>
+		<?php endif; ?>
+		</div>
+	</div>
 
+	<?php if ( has_nav_menu( 'nav-menu' ) ) : ?>
+		<nav id="site-navigation" class="main-navigation col-md-8" aria-label="<?php esc_attr_e( 'Top Menu', 'twentynineteen' ); ?>">
 			<?php
-			$description = get_bloginfo( 'description', 'display' );
-
-			if ( $description || is_customize_preview() ) :
+			wp_nav_menu(
+				array(
+					'theme_location' => 'nav-menu',
+					'menu_class'     => 'main-menu',
+					'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+				)
+			);
 			?>
-				<p class="site-description"><?php echo $description; ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding-text -->
-
-		<?php if ( ( twentyseventeen_is_frontpage() || ( is_home() && is_front_page() ) ) && ! has_nav_menu( 'top' ) ) : ?>
-		<a href="#content" class="menu-scroll-down"><?php echo twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ); ?><span class="screen-reader-text"><?php _e( 'Scroll down to content', 'twentyseventeen' ); ?></span></a>
+		</nav><!-- #site-navigation -->
 	<?php endif; ?>
-
-	</div><!-- .wrap -->
+	<?php if ( has_nav_menu( 'social' ) ) : ?>
+		<nav class="social-navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'twentynineteen' ); ?>">
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'social',
+					'menu_class'     => 'social-links-menu',
+					'link_before'    => '<span class="screen-reader-text">',
+					'link_after'     => '</span>' . twentynineteen_get_icon_svg( 'link' ),
+					'depth'          => 1,
+				)
+			);
+			?>
+		</nav><!-- .social-navigation -->
+	<?php endif; ?>
 </div><!-- .site-branding -->

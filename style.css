@@ -1,262 +1,135 @@
+@charset "UTF-8";
 /*
-Theme Name: company
-Theme URI: https://wordpress.org/themes/twentyseventeen/
-Author: the WordPress team
-Author URI: https://wordpress.org/
-Description: Twenty Seventeen brings your site to life with header video and immersive featured images. With a focus on business sites, it features multiple sections on the front page as well as widgets, navigation and social menus, a logo, and more. Personalize its asymmetrical grid with a custom color scheme and showcase your multimedia content with post formats. Our default theme for 2017 works great in many languages, for any abilities, and on any device.
-Version: 1.3
+Theme Name: hoya
+Theme URI: 
+Author: cjy
+Author URI: 
+Description: 浩亚信息科技有限公司网站模板
+Requires at least: WordPress 4.9.6
+Version: 1.0.0
 License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: twentyseventeen
-Tags: one-column, two-columns, right-sidebar, flexible-header, accessibility-ready, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
+License URI: LICENSE
+Text Domain: hoya
+Tags: one-column, flexible-header, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, rtl-language-support, sticky-post, threaded-comments, translation-ready
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
+
+Twenty Nineteen is based on Underscores https://underscores.me/, (C) 2012-2018 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
-
-
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
-1.0 Normalize
-2.0 Accessibility
-3.0 Alignments
-4.0 Clearings
-5.0 Typography
-6.0 Forms
-7.0 Formatting
-8.0 Lists
-9.0 Tables
-10.0 Links
-11.0 Featured Image Hover
-12.0 Navigation
-13.0 Layout
-   13.1 Header
-   13.2 Front Page
-   13.3 Regular Content
-   13.4 Posts
-   13.5 Pages
-   13.6 Footer
-14.0 Comments
-15.0 Widgets
-16.0 Media
-   16.1 Galleries
-17.0 Customizer
-18.0 SVGs Fallbacks
-19.0 Media Queries
-20.0 Print
+# Variables
+# Normalize
+# Typography
+	## Headings
+	## Copy
+# Elements
+	## Lists
+	## Tables
+# Forms
+	## Buttons
+	## Fields
+# Navigation
+	## Links
+	## Menus
+	## Next & Previous
+# Accessibility
+# Alignments
+# Clearings
+# Layout
+# Widgets
+# Content
+	## Archives
+	## Posts and pages
+	## Comments
+# Blocks
+# Media
+	## Captions
+	## Galleries
 --------------------------------------------------------------*/
+/*
+ * Chrome renders extra-wide &nbsp; characters for the Hoefler Text font.
+ * This results in a jumping cursor when typing in both the Classic and block
+ * editors. The following font-face override fixes the issue by manually inserting
+ * a custom font that includes just a Hoefler Text space replacement for that
+ * character instead.
+ */
 
+/* If we add the border using a regular CSS border, it won't look good on non-retina devices,
+ * since its edges can look jagged due to lack of antialiasing. In this case, we are several
+ * layers of box-shadow to add the border visually, which will render the border smoother. */
+/* Calculates maximum width for post content */
+/* Nested sub-menu padding: 10 levels deep */
+/* Ensure all font family declarations come with non-latin fallbacks */
+/* Build our non-latin font styles */
 
-/*--------------------------------------------------------------
->>> TABLE OF CONTENTS:
-----------------------------------------------------------------
-1.0 Normalize
-2.0 Accessibility
-3.0 Alignments
-4.0 Clearings
-5.0 Typography
-6.0 Forms
-7.0 Formatting
-8.0 Lists
-9.0 Tables
-10.0 Links
-11.0 Featured Image Hover
---------------------------------------------------------------*/
-
-
-/* 12.0 Navigation */
-
-html {
-  min-width: 1210px;
+body {
+  padding: 0;
+  margin: 0;
 }
 
-#menu-nav {
-    margin: 0 auto;
-    height: 73px;
-    position: relative;
+/*
+  header
+*/
+.site-branding {
+  background-color: #333;
+  height: 100px;
 }
-
-#menu-nav .logo {
-    position: relative;
-    top: 15px;
-    float: left;
+.site-branding .site-logo {
+  width: 60px;
+  height: 60px;
 }
-
-#menu-nav>.right,
-#menu-nav>.left {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    float: left;
-    margin-left: 28px;
-    height: 100%;
-    line-height: 73px;
+.site-branding .site-logo > a,
+.site-branding .site-logo > a > img {
+  width: inherit;
+  height: inherit;
 }
-
-#menu-nav>.left>li {
-    float: left;
-    font-size: 14px;
-    height: 100%;
-    padding: 0 15px;
-}
-
-#menu-nav>.left>li>a {
-    color: #333;
-    display: block;
-    width: inherit;
-    height: inherit;
-}
-
-#menu-nav>.left>li:hover {
-    color: #dc1e32;
-    border-bottom: 2px solid #dc1e32;
-}
-
-#menu-nav>.left>li:hover>a {
-    color: #dc1e32;
-    text-decoration: none;
-}
-
-#menu-nav>.right {
-    float: right;
-    height: 100%;
-    line-height: 73px;
-}
-
-#menu-nav>.right>li {
-    float: left;
-}
-
-#menu-nav>.right>li:first-child {
-  margin-right: 10px;
-}
-
-#menu-nav>.right>li>.glyphicon {
-    margin: 0 5px 0 0;
-}
-
-#menu-nav>.right>li .login {
-    border-right: 2px solid #333;
-    padding-right: 5px;
-}
-
-.dropdown-menu>ul {
-    margin: 0;
-    padding: 20px 0;
-    list-style: none;
-    text-align: center;
-    background-color: white;
-    border-radius: 8px;
-}
-
-.dropdown-menu>ul>li {
-  line-height: 28px;
-  text-decoration: none;
-  color: inherit;
-}
-.dropdown-menu>ul>li >a{
-  color: #333;
-}
-
-/*--------------------------------------------------------------
- * pagination
---------------------------------------------------------------*/
-/*导航居中*/
-.pagination-center {
-    position: relative;
-    float: left;
-    left: 50%;
-}
-
-.pagination {
-	position: relative;
-	float: left;
-	right: 50%;
-}
-
-/*导航居中*/
-.pagination>h2 {
-  display: none;
-}
-.pagination .nav-links>:first-child {
-	margin-left: 0;
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
-}
-.pagination .nav-links>:last-child {
-	border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px
-}
-.pagination .nav-links>span,
-.pagination .nav-links>a {
-	position: relative;
-  float: left;
-  padding: 6px 12px;
-  margin-left: -1px;
-  line-height: 1.42857143;
-  color: #337ab7;
-  text-decoration: none;
-  background-color: #fff;
-  border: 1px solid #ddd;
-}
-.pagination .nav-links>span {
-	color:black;
-}
-
-.post-navigation {
-  margin: 10px;
-  padding: 10px;
-}
-
-.post-navigation h2 {
-  display: none;
-}
-.post-navigation .nav-links {
-  text-align: center;
-}
-.post-navigation .nav-links>div{
-  border: 1px solid rgba(125, 125, 125, 0.2);
-  margin: 0 50px;
-  padding: 5px 25px;
-  border-radius: 20px;
-}
-.post-navigation .nav-links .nav-previous {
-  display: inline-block;
-}
-.post-navigation .nav-links .nav-next{
-  display: inline-block;
-}
-/*--------------------------------------------------------------
-
-13.0 Layout
-   13.1 Header
-   13.2 Front Page
-   13.3 Regular Content
-   13.4 Posts
-   13.5 Pages
---------------------------------------------------------------*/
-
-   /*13.6 Footer*/
-.site-footer .site-info {
-  background-color: #434343;
-  padding: 75px 0;
+.site-branding .site-title > a {
   color: white;
-  font-size: 16px;
+  font-size: 20px;
+  font-family: 黑体;
+}
+.site-branding .site-title > a:hover {
+  text-decoration: none;
+}
+
+.site-branding nav {
+  height: inherit;
+}
+.site-branding nav .menu-item a:hover {
+  text-decoration: none;
+}
+.site-branding nav>div>ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+.site-branding nav>div>ul>li {
+  font-size: 18px;
+  font-family: 黑体;
+  color: white;
+  width: 120px;
   text-align: center;
 }
-.site-footer .site-info div{
-  margin: 10px 0;
-  font-size: inherit;
-  color: inherit;
+.site-branding nav .menu-item > ul>li>a,
+.site-branding nav>div>ul>li>a {
+  color: white;
 }
-/*--------------------------------------------------------------
-14.0 Comments
-15.0 Widgets
-16.0 Media
-   16.1 Galleries
-17.0 Customizer
-18.0 SVGs Fallbacks
-19.0 Media Queries
-20.0 Print
---------------------------------------------------------------*/
+.site-branding nav .menu-item > ul {
+  display: none;
+  position: absolute;
+  padding: 0;
+  width: inherit;
+  list-style: none;
+  font-size: 16px;
+}
