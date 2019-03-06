@@ -56,7 +56,8 @@ if ( ! function_exists( 'hoya_setup' ) ) :
 		// This theme uses wp_nav_menu() in two locations.
 		register_nav_menus(
 			array(
-				'nav-menu' => __( '导航菜单', 'hoya' )
+				'nav-menu' => __( '导航菜单', 'hoya' ),
+				'footer-menu' => __( '底部菜单', 'hoya' )
 				//可以增加其他菜单,这个会在管理台菜单管理显示
 			)
 		);

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /*
 Theme Name: hoya
 Theme URI: 
@@ -21,6 +22,8 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
+
+
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -53,6 +56,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Captions
 	## Galleries
 --------------------------------------------------------------*/
+
+
 /*
  * Chrome renders extra-wide &nbsp; characters for the Hoefler Text font.
  * This results in a jumping cursor when typing in both the Classic and block
@@ -61,75 +66,267 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  * character instead.
  */
 
+
 /* If we add the border using a regular CSS border, it won't look good on non-retina devices,
  * since its edges can look jagged due to lack of antialiasing. In this case, we are several
  * layers of box-shadow to add the border visually, which will render the border smoother. */
+
+
 /* Calculates maximum width for post content */
+
+
 /* Nested sub-menu padding: 10 levels deep */
+
+
 /* Ensure all font family declarations come with non-latin fallbacks */
+
+
 /* Build our non-latin font styles */
 
 body {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
+
 
 /*
   header
 */
-.site-branding {
-  background-color: #333;
-  height: 100px;
-}
-.site-branding .site-logo {
-  width: 60px;
-  height: 60px;
-}
-.site-branding .site-logo > a,
-.site-branding .site-logo > a > img {
-  width: inherit;
-  height: inherit;
-}
-.site-branding .site-title > a {
-  color: white;
-  font-size: 20px;
-  font-family: 黑体;
-}
-.site-branding .site-title > a:hover {
-  text-decoration: none;
+
+#masthead1 {
+    background-color: #040d2e;
 }
 
-.site-branding nav {
-  height: inherit;
+header .site-branding {
+    background-color: inherit;
+    height: 100px;
 }
-.site-branding nav .menu-item a:hover {
-  text-decoration: none;
+
+header .site-branding .branding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.site-branding nav>div>ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
+
+header .site-branding .site-logo {
+    width: 60px;
+    height: 60px;
 }
-.site-branding nav>div>ul>li {
-  font-size: 18px;
-  font-family: 黑体;
-  color: white;
-  width: 120px;
-  text-align: center;
+
+header .site-branding .site-logo>a,
+header .site-branding .site-logo>a>img {
+    width: inherit;
+    height: inherit;
 }
-.site-branding nav .menu-item > ul>li>a,
-.site-branding nav>div>ul>li>a {
-  color: white;
+
+header .site-branding .site-title {
+    margin-top: 4px;
 }
-.site-branding nav .menu-item > ul {
-  display: none;
-  position: absolute;
-  padding: 0;
-  width: inherit;
-  list-style: none;
-  font-size: 16px;
+
+header .site-branding .site-title>a {
+    color: white;
+    font-size: 20px;
+    font-family: 黑体;
+    letter-spacing: 3px;
+}
+
+header .site-branding .site-title>a:hover {
+    text-decoration: none;
+}
+
+header .site-branding nav {
+    height: inherit;
+}
+
+header .site-branding nav .menu-item a:hover {
+    text-decoration: none;
+}
+
+header .site-branding nav>div>ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+header .site-branding nav>div>ul>li {
+    position: relative;
+    font-size: 18px;
+    font-family: 黑体;
+    color: white;
+    width: 120px;
+    text-align: center;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .site-branding nav>div>ul>li:hover {
+    cursor: pointer;
+    background: linear-gradient(#040d2e, #0d68c8);
+}
+
+header .site-branding nav .menu-item>ul>li>a,
+header .site-branding nav>div>ul>li>a {
+    color: white;
+}
+
+header .site-branding nav .menu-item>ul {
+    display: none;
+    position: absolute;
+    padding: 0;
+    width: inherit;
+    list-style: none;
+    font-size: 16px;
+    top: 100px;
+    left: 0;
+    z-index: 1;
+    background: #0d68c8;
+}
+
+header .site-branding nav .menu-item>ul>li {
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .site-branding nav .menu-item>ul>li:hover {
+    background: #094f95;
+}
+
+
+/*
+*轮播图
+*/
+
+#masthead2 {
+    background-color: #06154c;
+}
+
+#masthead2 .carousel {
+    height: 400px;
+}
+
+#masthead2 .carousel .carousel-inner {
+    height: inherit;
+}
+
+#masthead2 .carousel .item {
+    height: inherit;
+    width: 100%;
+}
+
+
+/*
+footer
+*/
+
+footer.site-footer {
+    height: 360px;
+    background: #24262d;
+    padding-top: 76px;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer.site-footer>.container {
+    height: 224px;
+}
+
+footer.site-footer>.container>.row {
+    height: inherit;
+}
+
+footer.site-footer>.container>.row .branding {
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+footer.site-footer>.container>.row .branding img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 4px;
+}
+
+footer.site-footer>.container>.row .branding a {
+    font-size: 20px;
+    color: white;
+    font-family: 黑体;
+    letter-spacing: 2px;
+}
+
+footer nav .main-menu {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+footer nav .main-menu>li {
+    width: 200px;
+    padding-left: 35px;
+}
+
+footer nav .main-menu>li>a {
+    color: white;
+    font-size: 20px;
+    font-family: 黑体;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+footer nav .main-menu>li>ul {
+    padding: 0;
+    margin: 0;
+}
+
+footer nav .main-menu>li>ul>li>a {
+    color: white;
+    font-size: 12px;
+    font-family: 黑体;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+footer nav>div>ul>li:last-child>div {
+    color: white;
+    font-size: 12px;
+    font-family: 黑体;
+    margin-bottom: 15px;
+}
+
+footer .wechat-QR {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer .wechat-QR div {
+    color: white;
+    font-size: 12px;
+    font-family: 黑体;
+}
+
+footer .copyright {
+    height: 60px;
+    color: white;
+    border-top: 2px solid #3d3f46;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
