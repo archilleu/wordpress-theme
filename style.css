@@ -30,46 +30,46 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 # Variables
 # Normalize
 # Typography
-	## Headings
-	## Copy
+## Headings
+## Copy
 # Elements
-	## Lists
-	## Tables
+## Lists
+## Tables
 # Forms
-	## Buttons
-	## Fields
+## Buttons
+## Fields
 # Navigation
-	## Links
-	## Menus
-	## Next & Previous
+## Links
+## Menus
+## Next & Previous
 # Accessibility
 # Alignments
 # Clearings
 # Layout
 # Widgets
 # Content
-	## Archives
-	## Posts and pages
-	## Comments
+## Archives
+## Posts and pages
+## Comments
 # Blocks
 # Media
-	## Captions
-	## Galleries
+## Captions
+## Galleries
 --------------------------------------------------------------*/
 
 
 /*
- * Chrome renders extra-wide &nbsp; characters for the Hoefler Text font.
- * This results in a jumping cursor when typing in both the Classic and block
- * editors. The following font-face override fixes the issue by manually inserting
- * a custom font that includes just a Hoefler Text space replacement for that
- * character instead.
- */
+* Chrome renders extra-wide &nbsp; characters for the Hoefler Text font.
+* This results in a jumping cursor when typing in both the Classic and block
+* editors. The following font-face override fixes the issue by manually inserting
+* a custom font that includes just a Hoefler Text space replacement for that
+* character instead.
+*/
 
 
 /* If we add the border using a regular CSS border, it won't look good on non-retina devices,
- * since its edges can look jagged due to lack of antialiasing. In this case, we are several
- * layers of box-shadow to add the border visually, which will render the border smoother. */
+* since its edges can look jagged due to lack of antialiasing. In this case, we are several
+* layers of box-shadow to add the border visually, which will render the border smoother. */
 
 
 /* Calculates maximum width for post content */
@@ -90,7 +90,7 @@ body {
 
 
 /*
-  header
+header
 */
 
 #masthead1 {
@@ -110,6 +110,7 @@ header .site-branding .branding {
 }
 
 header .site-branding .site-logo {
+    margin-top: 5px;
     width: 60px;
     height: 60px;
 }
@@ -329,4 +330,300 @@ footer .copyright {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+/*
+business areas
+*/
+
+.business-areas .business-title {
+    height: 252px;
+    background: #f0f0f0;
+}
+
+.news .news-title>.container,
+.about-us .about-title>.container,
+.business-areas .business-title>.container {
+    height: inherit;
+    position: relative;
+}
+
+.news .news-title>.container>.row,
+.about-us .about-title>.container>.row,
+.business-areas .business-title>.container>.row {
+    height: inherit;
+}
+
+.news .news-title>.container>.row:first-child,
+.about-us .about-title>.container>.row:first-child,
+.business-areas .business-title>.container>.row:first-child {
+    position: absolute;
+    width: 100%;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.news .news-title>.container>.row:last-child,
+.about-us .about-title>.container>.row:last-child,
+.business-areas .business-title>.container>.row:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.news .news-title>.container>.row:first-child>div,
+.about-us .about-title>.container>.row:first-child>div,
+.business-areas .business-title>.container>.row:first-child>div {
+    color: #d9d9d9;
+    font-size: 60px;
+}
+
+.news .news-title>.container>.row:last-child>div:first-child,
+.about-us .about-title>.container>.row:last-child>div:first-child,
+.business-areas .business-title>.container>.row:last-child>div:first-child {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.news .news-title>.container>.row:last-child>div>div:first-child,
+.about-us .about-title>.container>.row:last-child>div>div:first-child,
+.business-areas .business-title>.container>.row:last-child>div>div:first-child {
+    color: #333;
+    font-family: 黑体;
+    font-size: 32px;
+    width: 140px;
+    height: 60px;
+    border-top: 1px solid #0d6bc6;
+    border-bottom: 1px solid #0d6bc6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.news .news-title>.container>.row:last-child>div>div:last-child,
+.about-us .about-title>.container>.row:last-child>div>div:last-child,
+.business-areas .business-title>.container>.row:last-child>div>div:last-child {
+    color: #666;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.business-areas .business-content {
+    height: 612px;
+    background-image: url(./img/business-areas-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.business-areas .business-content .container,
+.business-areas .business-content .container .row,
+.business-areas .business-content .container .row>.col-md-12:first-child {
+    height: inherit;
+}
+
+.business-areas .business-content .container .row {
+    position: relative;
+}
+
+.business-areas .business-content .container .row>.col-md-12:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.business-areas .business-content .container .row>.col-md-12:first-child div {
+    height: 350px;
+}
+
+.business-areas .business-content .container .row>.col-md-12:first-child div img {
+    height: inherit;
+}
+
+.business-areas .business-content .container .row>.col-md-12:last-child {
+    position: absolute;
+    width: 100%;
+    bottom: 58px;
+    display: flex;
+    justify-content: center;
+}
+
+.business-areas .business-content .container .row>.col-md-12:last-child div {
+    font-size: 14px;
+    width: 83px;
+    height: 28px;
+    text-align: center;
+    color: white;
+    font-family: 黑体;
+    background: #0b6dc6;
+    border-radius: 10px;
+    padding: 3px 0px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+/*
+about us
+*/
+
+.about-us .about-title {
+    height: 319px;
+    background: #f0f0f0;
+}
+
+.about-us .about-content img {
+    position: relative;
+    top: -40px;
+}
+
+.about-us .about-content .content {
+    padding: 20px 0 20px 60px;
+}
+
+.about-us .about-content .content h2 {
+    border-left: 4px solid #0b7bda;
+    font-size: 24px;
+    font-family: 黑体;
+    color: #333;
+    padding-left: 30px;
+}
+
+.about-us .about-content .content p {
+    font-size: 16px;
+    font-family: 黑体;
+    text-indent: 32px;
+    line-height: 29px;
+    letter-spacing: 2px;
+}
+
+.about-us .about-content .more {
+    font-size: 14px;
+    font-family: 黑体;
+    color: #0d6bc8;
+    border: 1px solid #0d6bc8;
+    width: 112px;
+    padding: 5px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.about-us .about-content .more span {
+    margin-left: 10px;
+}
+
+
+/*
+news
+*/
+
+.news .news-title {
+    background: #f0f0f0;
+}
+
+.news .news-title {
+    height: 256px;
+}
+
+.news-content .item {
+    position: relative;
+}
+
+.news-content .item .category {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #4989c7;
+    opacity: 0.7;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    font-family: 黑体;
+    padding: 2px;
+    right: 25px;
+    top: 10px;
+}
+
+.news-content .item .image {
+    height: 300px;
+    width: 100%;
+}
+
+.news-content .item .image img {
+    height: inherit;
+    width: inherit;
+}
+
+.news-content .item .content {
+    padding: 10px 15px;
+    border: 1px solid #f1eded;
+}
+
+.news-content .item .content .title {
+    color: #333;
+    font-size: 18px;
+    font-family: 黑体;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+
+.news-content .item .content .excerpt {
+    text-indent: 28px;
+    letter-spacing: 2px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+    box-orient: vertical;
+    height: 82px;
+}
+
+.news-content .item .content .meta {
+    color: #c0c0c0;
+    font-size: 12px;
+    font-family: 黑体;
+    margin-top: 12px;
+}
+
+.news-content .item .content .meta span:first-child {
+    margin-right: 5px;
+}
+
+.news-content .item .content .meta .link {
+    float: right;
+    color: #c0c0c0;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.news-content .col-md-12:last-child {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.news-content .col-md-12:last-child .more {
+    width: 140px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0d6bc6;
+    color: white;
+    font-size: 16px;
+    font-family: 黑体;
+    border-radius: 8px;
+    cursor: pointer;
 }

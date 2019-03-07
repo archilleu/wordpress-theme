@@ -251,10 +251,15 @@ add_action( 'wp_enqueue_scripts', 'hoya_scripts' );
 function twentynineteen_skip_link_focus_fix() {
 	// The following is minified via `terser --compress --mangle -- js/skip-link-focus-fix.js`.
 	?>
-	<script>
-	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
-	</script>
-	<?php
+<script>
+/(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window
+    .addEventListener("hashchange", function() {
+        var t, e = location.hash.substring(1);
+        /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i
+            .test(t.tagName) || (t.tabIndex = -1), t.focus())
+    }, !1);
+</script>
+<?php
 }
 add_action( 'wp_print_footer_scripts', 'twentynineteen_skip_link_focus_fix' );
 
@@ -291,12 +296,27 @@ function twentynineteen_colors_css_wrap() {
 	}
 	?>
 
-	<style type="text/css" id="custom-theme-colors" <?php echo is_customize_preview() ? 'data-hue="' . absint( $primary_color ) . '"' : ''; ?>>
-		<?php echo twentynineteen_custom_colors_css(); ?>
-	</style>
-	<?php
+<style type="text/css" id="custom-theme-colors"
+    <?php echo is_customize_preview() ? 'data-hue="' . absint( $primary_color ) . '"' : ''; ?>>
+<?php echo twentynineteen_custom_colors_css();
+?>
+</style>
+<?php
 }
 add_action( 'wp_head', 'twentynineteen_colors_css_wrap' );
+
+
+/*获取特色图片地址*/
+function get_post_thumbnail_url($post_id) {
+	$post_id = ( null === $post_id ) ? get_the_ID() : $post_id;
+	$thumbnail_id = get_post_thumbnail_id($post_id->ID);
+	if($thumbnail_id ) {
+		$thumb = wp_get_attachment_image_src($thumbnail_id, 'thumbnail');
+		return $thumb[0];
+	} else {
+		return false;
+	}
+}
 
 /**
  * Default color filters.

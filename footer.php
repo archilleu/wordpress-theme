@@ -52,13 +52,17 @@
             </nav><!-- #site-navigation -->
             <?php endif; ?>
             <div class="wechat-QR col-md-2">
-				<img src="">
-				<?php
+                <?php
 					$id = 80;
-					$wechat = get_post($id);
-					echo $wechat;
+                    $wechat = get_post($id);
+                    if(!empty($wechat)):
+                    echo $wechat->post_content;
+                    endif;
 				?>
-				<div>微信公众号</div>
+                <div>
+                    <?php if(!empty($wechat)):
+                    echo $wechat->post_title; endif; ?>
+                </div>
             </div>
 
         </div>

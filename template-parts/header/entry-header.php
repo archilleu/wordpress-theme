@@ -13,9 +13,11 @@
 
 <div class="container">
     <?php
+		$cat_name = '首页轮播图片';
+		$cat_id = get_cat_ID( $cat_name );
 		$args = array(
 			'numberposts'      => 15,
-			'category'         => 17,//home-carousel id
+			'category'         => $cat_id
 		);
 		$latest_posts = get_posts( $args );
 	?>
@@ -23,24 +25,25 @@
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-			<?php $idx = 0; foreach ( $latest_posts as $post ) :
+            <?php $idx = 0; foreach ( $latest_posts as $post ) :
 			setup_postdata( $post ); ?>
-				<li data-target="#carousel-example-generic" data-slide-to="<?php echo $idx; ?>" class="<?php if($idx==0): echo 'active'; endif; ?>"></li>
-				<?php $idx++; endforeach; 
+            <li data-target="#carousel-example-generic" data-slide-to="<?php echo $idx; ?>"
+                class="<?php if($idx==0): echo 'active'; endif; ?>"></li>
+            <?php $idx++; endforeach; 
 			wp_reset_postdata(); ?>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-			<?php $idx = 0; foreach ( $latest_posts as $post ) :
+            <?php $idx = 0; foreach ( $latest_posts as $post ) :
 			setup_postdata( $post ); ?>
-				<div class="item <?php if($idx==0): echo 'active'; endif; ?>">
-					<?php the_content(); ?>
-					<div class="carousel-caption">
-						<?php the_title(); ?>
-					</div>
-				</div>
-				<?php $idx++; endforeach; 
+            <div class="item <?php if($idx==0): echo 'active'; endif; ?>">
+                <?php the_content(); ?>
+                <div class="carousel-caption">
+                    <?php the_title(); ?>
+                </div>
+            </div>
+            <?php $idx++; endforeach; 
 			wp_reset_postdata(); ?>
         </div>
 
