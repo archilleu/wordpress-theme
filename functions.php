@@ -318,6 +318,46 @@ function get_post_thumbnail_url($post_id) {
 	}
 }
 
+/*获取分类下面的子分类*/
+function get_category_by_id($cat, $class) {
+	$categories = get_categories( array(
+		'child_of' => $cat,
+		'hide_empty' => 0,
+		'orderby' => 'id',
+		'order' => 'ASC',
+	) );
+ 
+	foreach( $categories as $category ) {
+		$category_link = sprintf( 
+			'<a href="%1$s" alt="%2$s">%3$s</a>',
+			esc_url( get_category_link( $category->term_id ) ),
+			esc_attr( sprintf( __( 'View all posts in %s', 'textdomain' ), $category->name ) ),
+			esc_html( $category->name )
+		);
+		echo '<div class="'.$class.'">' . $category_link .'</div>';
+	}
+}
+
+/*获取当前分类的路径分类*/
+function get_category_route($cat) {
+	// 取得当前分类
+	$categories = array();
+	$this_category = get_category($cat);
+	array_push($categories, $this_category->name);
+	// 若当前分类有上级分类时循环
+	while($this_category->category_parent) {
+	// 将当前分类设为上级分类
+		$this_category = get_category($this_category->category_parent); 
+		array_push($categories, $this_category->name);;
+	}
+
+	echo '<ul><li>首页</li>';
+	foreach(array_reverse($categories) as $category) {
+		echo '<li><span class="glyphicon glyphicon-menu-right"></span>'.$category.'</li>';
+	}
+	echo '</ul>';
+}
+
 /**
  * Default color filters.
  */

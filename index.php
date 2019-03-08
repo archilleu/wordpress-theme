@@ -84,7 +84,11 @@ get_header();
                             </div>
                             <div class="col-md-6 content">
                                 <div><?php echo $post->post_content; ?><div>
-                                        <div class="more">了解更多<span class="glyphicon glyphicon-plus"></span></div>
+										<?php 
+											$cat_name = '公司简介';
+											$cat_id = get_cat_ID( $cat_name );
+										?>
+                                        <div class="more"><a href="<?php echo get_category_link( $cat_id);?>">了解更多</a><span class="glyphicon glyphicon-plus"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -114,14 +118,14 @@ get_header();
                         <div class="col-md-12">
                             <div class="col-md-4 item">
                                 <?php
-										$cat_name = '科技资讯';
-										$cat_id = get_cat_ID( $cat_name );
-										$args = array(
-											'numberposts'      => 1,
-											'category'         => $cat_id
-										);
-										$latest_posts = get_posts( $args );
-										?>
+								$cat_name = '科技资讯';
+								$cat_id = get_cat_ID( $cat_name );
+								$args = array(
+									'numberposts'      => 1,
+									'category'         => $cat_id
+								);
+								$latest_posts = get_posts( $args );
+								?>
                                 <div class="category">
                                     <?php echo $cat_name; ?>
                                 </div>
@@ -144,14 +148,14 @@ get_header();
                                 <?php endforeach; wp_reset_postdata(); ?>
                             </div>
                             <?php
-										$cat_name = '活动资讯';
-										$cat_id = get_cat_ID( $cat_name );
-										$args = array(
-											'numberposts'      => 2,
-											'category'         => $cat_id
-										);
-										$latest_posts = get_posts( $args );
-									?>
+								$cat_name = '活动资讯';
+								$cat_id = get_cat_ID( $cat_name );
+								$args = array(
+									'numberposts'      => 2,
+									'category'         => $cat_id
+								);
+								$latest_posts = get_posts( $args );
+							?>
                             <?php foreach ( $latest_posts as $post ) : setup_postdata( $post ); ?>
                             <div class="col-md-4 item">
                                 <div class="category">
@@ -176,7 +180,11 @@ get_header();
                             <?php endforeach; wp_reset_postdata(); ?>
                         </div>
                         <div class="col-md-12">
-                            <div class="more">更多资讯</div>
+							<?php 
+								$cat_name = '新闻动态';
+								$cat_id = get_cat_ID( $cat_name );
+							?>
+                            <div class="more"><a href="<?php echo get_category_link( $cat_id);?>">更多资讯</a></div>
                         </div>
                     </div>
                 </div>

@@ -159,7 +159,7 @@ header .site-branding nav>div>ul>li {
     font-size: 18px;
     font-family: 黑体;
     color: white;
-    width: 120px;
+    width: 125px;
     text-align: center;
     height: inherit;
     display: flex;
@@ -175,13 +175,23 @@ header .site-branding nav>div>ul>li:hover {
 header .site-branding nav .menu-item>ul>li>a,
 header .site-branding nav>div>ul>li>a {
     color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .site-branding nav>div>ul>li>a[rel=home] {
+    display: none;
 }
 
 header .site-branding nav .menu-item>ul {
     display: none;
     position: absolute;
     padding: 0;
-    width: inherit;
+    max-width: 145px;
+    min-width: 125px;
     list-style: none;
     font-size: 16px;
     top: 100px;
@@ -614,7 +624,7 @@ news
     justify-content: center;
 }
 
-.news-content .col-md-12:last-child .more {
+.news-content .col-md-12:last-child .more>a {
     width: 140px;
     height: 40px;
     display: flex;
@@ -626,4 +636,83 @@ news
     font-family: 黑体;
     border-radius: 8px;
     cursor: pointer;
+}
+
+
+/*
+category
+*/
+
+.category-main .category-head>img {
+    width: 100%;
+}
+
+.category-main>.container>.row {
+    margin-top: 30px;
+    margin-bottom: 80px;
+}
+
+.category-main .category-left {
+    width: 150px;
+}
+
+.category-main .category-left .title {
+    text-align: center;
+    color: #FFF;
+    background-color: #F00;
+    padding: 5px;
+    border: 1px solid #f00;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.category-main .category-left .sub-category {
+    border: 1px solid #f00;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.category-main .category-left .sub-category .second-category {
+    margin: 10px 0;
+}
+
+.category-main .category-content .title-nav {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #808080;
+}
+
+.category-main .category-content .title-nav>ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.category-main .category-content .title-nav>ul>li span {
+    margin-right: 10px;
+}
+
+.category-main .category-content .title-nav>ul>li:last-child {
+    color: red;
+}
+
+.category-main .category-content .title-nav>ul>li:last-child span {
+    color: black;
+}
+
+.category-main .category-content>div>article {
+    padding: 40px 20px 20px 20px;
+}
+
+.category-main .category-content>div>article .entry-content div:first-child {
+    color: #808080;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 15px;
 }

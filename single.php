@@ -4,57 +4,73 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package WordPress
- * @subpackage Twenty_Nineteen
+ * @package hoya 
+ * @subpackage hoya
  * @since 1.0.0
  */
 
 get_header();
 ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
+<section class="category-main">
+    <div class="container">
 
-			<?php
+        <div class="category-head">
+            <img src="<?php echo esc_url( get_template_directory_uri()).'/img/category-head.jpg'; ?>" alt="">
+        </div>
 
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+        <div class="row">
+            <div class="col-md-3">
+				<?php 
+					$cat_name = '新闻动态';
+					$cat_id = get_cat_ID( $cat_name );
+					$categories = get_the_category();
+					$cur_catetory = null;
+					foreach($categories as $category) {
+						if(get_category_children($category->term_id) == "") {
+							$cur_catetory = $category->term_id;
+						}
+					}
+				?>
+                <div class="category-left">
+                    <div class="title">
+                        <?php $thiscat = get_category($cat_id); echo $thiscat ->name;?>
+                    </div>
 
-				get_template_part( 'template-parts/content/content', 'single' );
+                    <?php if(get_category_children($cat_id) != "") {
+						echo '<div class="sub-category">';
+						echo get_category_by_id($cat_id, "second-category");
+						echo '</div>';
+					}?>
+                </div>
+            </div>
 
-				if ( is_singular( 'attachment' ) ) {
-					// Parent post navigation.
-					the_post_navigation(
-						array(
-							/* translators: %s: parent post link */
-							'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentynineteen' ), '%title' ),
-						)
-					);
-				} elseif ( is_singular( 'post' ) ) {
-					// Previous/next post navigation.
-					the_post_navigation(
-						array(
-							'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Next Post', 'twentynineteen' ) . '</span> ' .
-								'<span class="screen-reader-text">' . __( 'Next post:', 'twentynineteen' ) . '</span> <br/>' .
-								'<span class="post-title">%title</span>',
-							'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Previous Post', 'twentynineteen' ) . '</span> ' .
-								'<span class="screen-reader-text">' . __( 'Previous post:', 'twentynineteen' ) . '</span> <br/>' .
-								'<span class="post-title">%title</span>',
-						)
-					);
-				}
+            <div class="col-md-9 category-content">
+                <div class="col-md-12 title-nav">
+                    <?php get_category_route($cur_catetory); ?>
+                </div>
+                <div class="col-md-12">
+                    <?php
+						if ( have_posts() ) {
 
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) {
-					comments_template();
-				}
+							// Load posts loop.
+							while ( have_posts() ) {
+								the_post();
+								get_template_part( 'template-parts/content/content', 'single');
+							}
 
-			endwhile; // End of the loop.
-			?>
+						} else {
+							// If no content, include the "No posts found" template.
+							get_template_part( 'template-parts/content/content', 'none' );
+						}
+				?>
+                </div>
+            </div>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
+        </div>
+
+    </div>
+</section><!-- .content-area -->
 
 <?php
 get_footer();
