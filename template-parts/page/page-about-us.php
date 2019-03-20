@@ -4,14 +4,18 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package hoya
- * @subpackage hoya
+ * @package WordPress
+ * @subpackage Twenty_Nineteen
  * @since 1.0.0
  */
 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php
+	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full')[0];
+?>
+    <img src="<?php echo $thumb ?>">
 	<header class="entry-header">
 		<?php the_title( sprintf( '<h3 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h3>' ); ?>
 	</header><!-- .entry-header -->

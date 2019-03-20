@@ -31,7 +31,7 @@
             </div><!-- .layout-wrap -->
         </header><!-- #masthead -->
 
-        <header id="masthead2" class="site-header container-fluid">
+        <header id="masthead2" class="site-header">
             <div class="site-carousel">
                 <?php get_template_part( 'template-parts/header/entry', 'header' ); ?>
             </div><!-- .entry-header -->
