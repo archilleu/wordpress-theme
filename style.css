@@ -111,8 +111,6 @@ header .site-branding .branding {
 
 header .site-branding .site-logo {
     margin-top: 5px;
-    width: 60px;
-    height: 60px;
 }
 
 header .site-branding .site-logo>a,
@@ -255,7 +253,7 @@ footer
 */
 
 footer.site-footer {
-    height: 360px;
+    height: 390px;
     background: #24262d;
     padding-top: 76px;
 }
@@ -269,7 +267,7 @@ footer ul {
 }
 
 footer.site-footer>.container {
-    height: 224px;
+    height: 254px;
 }
 
 footer.site-footer>.container>.row {
@@ -285,8 +283,6 @@ footer.site-footer>.container>.row .branding {
 }
 
 footer.site-footer>.container>.row .branding img {
-    width: 60px;
-    height: 60px;
     margin-bottom: 4px;
 }
 
@@ -377,6 +373,55 @@ footer .copyright {
 /*
 business areas
 */
+
+.page-business-area .entry-content {
+    margin-bottom: 60px 0;
+}
+
+.page-business-area .entry-content>p {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.page-business-area .entry-content figure {
+    text-align: center;
+    clear: both;
+}
+
+.page-business-area .entry-content .wp-block-button {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.page-business-area .entry-content .wp-block-button__link {
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 0;
+    border: 1px solid white;
+}
+
+.page-business-area .entry-content .wp-block-button:nth-of-type(odd) {
+    float: right;
+    top: -60px;
+    left: -607px;
+}
+
+.page-business-area .entry-content .wp-block-button:nth-of-type(even) {
+    float: right;
+    top: -60px;
+    left: -95px;
+}
+
+.page-business-area .entry-content .wp-block-button:nth-of-type(5) {
+    top: -60px;
+    left: -95px;
+}
+
+.page-business-area .entry-content .wp-block-button:nth-of-type(6) {
+    top: -60px;
+    left: -607px;
+}
 
 .business-areas .business-title {
     height: 252px;
@@ -486,6 +531,20 @@ business areas
     height: inherit;
 }
 
+.business-areas .business-content .container .row>.col-md-12:first-child div a {
+    background-color: #333;
+    background-color: #00000094;
+    font-size: 30px;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+    position: relative;
+    top: -62px;
+    text-decoration: none;
+}
+
 .business-areas .business-content .container .row>.col-md-12:last-child {
     position: absolute;
     width: 100%;
@@ -507,6 +566,10 @@ business areas
     display: flex;
     justify-content: center;
     cursor: pointer;
+}
+
+.business-areas .business-content .container .row>.col-md-12:last-child div a {
+    color: white;
 }
 
 
@@ -596,6 +659,7 @@ news
     width: 100%;
 }
 
+.news-content .item .image a,
 .news-content .item .image img {
     height: inherit;
     width: inherit;
@@ -771,7 +835,6 @@ single
 .category-single-main .banner {
     background-position: center;
     height: 360px;
-    background-image: url(./img/news-trends-banner.jpg);
 }
 
 .category-single-main .title-nav {
@@ -804,6 +867,11 @@ single
 公司概况
 */
 
+.page-conter-uas>.banner,
+.page-smart-glasses>.banner,
+.page-ticket>.banner,
+.page-business-area>.banner,
+.page-contact-us>.banner,
 .page-e-fly>.banner,
 .page-uav>.banner,
 .page-fly-smart-cloud>.banner,
@@ -812,6 +880,11 @@ single
     height: 360px;
 }
 
+.page-conter-uas .title,
+.page-smart-glasses .title,
+.page-ticket .title,
+.page-business-area .title,
+.page-contact-us .title,
 .page-e-fly .title,
 .page-uav .title,
 .page-fly-smart-cloud .title,
@@ -848,6 +921,9 @@ single
     letter-spacing: 1px;
 }
 
+.page-conter-uas .entry-content>.row:nth-child(1),
+.page-smart-glasses .entry-content>.row:nth-child(1),
+.page-ticket .entry-content>.row:nth-child(1),
 .page-uav .entry-content>.row:nth-child(1),
 .page-fly-smart-cloud .entry-content>.row:nth-child(1),
 .page-e-fly .entry-content>.row:nth-child(1) {
@@ -855,6 +931,9 @@ single
     text-align: center;
 }
 
+.page-conter-uas .entry-content>.row:nth-child(1)>div>div:first-child,
+.page-smart-glasses .entry-content>.row:nth-child(1)>div>div:first-child,
+.page-ticket .entry-content>.row:nth-child(1)>div>div:first-child,
 .page-uav .entry-content>.row:nth-child(1)>div>div:first-child,
 .page-fly-smart-cloud .entry-content>.row:nth-child(1)>div>div:first-child,
 .page-e-fly .entry-content>.row:nth-child(1)>div>div:first-child {
@@ -862,6 +941,9 @@ single
     font-weight: bold;
 }
 
+.page-conter-uas .entry-content>.row:nth-child(1)>div>div:last-child,
+.page-smart-glasses .entry-content>.row:nth-child(1)>div>div:last-child,
+.page-ticket .entry-content>.row:nth-child(1)>div>div:last-child,
 .page-uav .entry-content>.row:nth-child(1)>div>div:last-child,
 .page-fly-smart-cloud .entry-content>.row:nth-child(1)>div>div:last-child,
 .page-e-fly .entry-content>.row:nth-child(1)>div>div:last-child {
@@ -938,4 +1020,202 @@ single
     font-weight: bold;
     margin: 10px 0 20px 0;
     color: #337ab7;
+}
+
+
+/*
+人力资源
+*/
+
+.category-human-resources .banner {
+    background-position: center;
+    height: 360px;
+    background-image: url(./img/human-resources-banner.jpg);
+}
+
+.category-human-resources .title-nav {
+    border-bottom: 3px solid #337ab7;
+    margin-top: 10px;
+    padding: 25px 0;
+}
+
+.category-human-resources .title-nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    color: #333;
+    margin: 0;
+}
+
+.category-human-resources .content {
+    margin: 25px 0;
+}
+
+.category-human-resources .article-title {
+    margin-bottom: 10px;
+}
+
+.category-human-resources .article-title a {
+    font-size: 20px;
+    color: #333;
+}
+
+.category-human-resources .article-excerpt {
+    display: flex;
+    justify-content: space-between;
+}
+
+.category-human-resources .article-excerpt div:first-child {
+    color: gray;
+}
+
+
+/*
+联系我们
+*/
+
+.page-contact-us .entry-content {
+    margin: 50px 0;
+}
+
+
+/*
+通航售票
+*/
+
+.page-ticket .entry-content .row:nth-of-type(2) {
+    margin: 40px 0;
+}
+
+.page-ticket .entry-content .row:nth-of-type(2)>div {
+    color: #333;
+    font-size: 16px;
+    letter-spacing: 4px;
+    line-height: 28px;
+}
+
+.page-ticket .entry-content .row .col-md-6 img {
+    width: 100%;
+}
+
+.page-ticket .entry-content .row .f-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 90px;
+}
+
+.page-ticket .entry-content .row .col-md-3 .col-md-12 {
+    display: flex;
+    justify-content: center;
+}
+
+.page-ticket .entry-content .row .col-md-3 .item-title {
+    width: 120px;
+    height: 120px;
+    background: #7eb9ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    transform: rotate(45deg);
+    margin-bottom: 40px;
+}
+
+.page-ticket .entry-content .row .col-md-3 .item-title span {
+    transform: rotate(-45deg);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.page-ticket .entry-content .row .col-md-3 .item-content {
+    color: #333;
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 26px;
+}
+
+
+/*
+智能眼镜
+*/
+
+.page-smart-glasses .entry-content .row:nth-of-type(2) {
+    margin-top: 40px;
+}
+
+.page-smart-glasses .entry-content .row:nth-of-type(2)>div {
+    color: #333;
+    font-size: 16px;
+    letter-spacing: 4px;
+    line-height: 28px;
+    margin-bottom: 50px;
+}
+
+.page-smart-glasses .entry-content .row .f-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 90px;
+    margin-top: 40px;
+}
+
+.page-smart-glasses .entry-content .row .col-md-12:nth-of-type(2) {
+    display: flex;
+    justify-content: center;
+}
+
+
+/*
+无人机反制
+*/
+
+.page-conter-uas .entry-content .row:nth-of-type(2)>div {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.page-conter-uas .entry-content .row:nth-of-type(3) {}
+
+.page-conter-uas .entry-content .row:nth-of-type(4) .f-title,
+.page-conter-uas .entry-content .row:nth-of-type(3) .f-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.page-conter-uas .entry-content .row:nth-of-type(3) div:nth-of-type(2) {
+    color: #333;
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 26px;
+    text-align: center;
+}
+
+.page-conter-uas .entry-content .row:nth-of-type(3) div:nth-of-type(3) {
+    display: flex;
+    justify-content: center;
+}
+
+.page-conter-uas .entry-content .row:nth-of-type(4) .col-md-12 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-conter-uas .entry-content .row:nth-of-type(4) .col-md-12 img {
+    width: 100%;
+}
+
+.page-conter-uas .entry-content .row:nth-of-type(4) .col-md-12 .col-md-6:last-child {
+    color: #333;
+    font-size: 16px;
+}
+
+.page-conter-uas .entry-content .row:nth-of-type(4) .col-md-12 .col-md-6:last-child>p:first-child {
+    font-weight: bold;
 }

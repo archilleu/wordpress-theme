@@ -21,15 +21,28 @@ get_header();
         <?php
 		if (is_page(array('company-profile'))) {
 			get_template_part('template-parts/page/page', 'company');
-		} elseif (is_page(array('business-area', 'e-fly'))) {
+		} elseif (is_page(array('business-area'))) {
+			get_template_part('template-parts/page/page', 'business-area');
+		} elseif (is_page(array('e-fly'))) {
 			get_template_part('template-parts/page/page', 'e-fly');
 		} elseif (is_page(array('uav'))) {
 			get_template_part('template-parts/page/page', 'uav');
 		} elseif (is_page(array('fly-smart-cloud'))) {
 			get_template_part('template-parts/page/page', 'fly-smart-cloud');
+		} elseif (is_page(array('ticket'))) {
+			get_template_part('template-parts/page/page', 'ticket');
+		} elseif (is_page(array('smart-glasses'))) {
+			get_template_part('template-parts/page/page', 'smart-glasses');
+		} elseif (is_page(array('conter-uas'))) {
+			get_template_part('template-parts/page/page', 'conter-uas');
 		} elseif (is_page(array('about-us'))) {
 			get_template_part('template-parts/page/page', 'about-us');
-		} else { }
+		} elseif (is_page(array('contact-us'))) {
+			get_template_part('template-parts/page/page', 'contact-us');
+		} else {
+            the_title();
+            the_content();
+         }
 		?>
 
         <?php endwhile; ?>

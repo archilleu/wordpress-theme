@@ -39,17 +39,20 @@ get_header();
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-4">
-                                <img src="./wp-content/themes/wordpress-theme/img/business-areas-1.png" alt="">
+                                <img src="./wp-content/themes/wordpress-theme/img/business-areas-1.jpg" alt="">
+                                <a href="./business-area/e-fly">E浩飞</a>
                             </div>
                             <div class="col-md-4">
-                                <img src="./wp-content/themes/wordpress-theme/img/business-areas-2.png" alt="">
+                                <img src="./wp-content/themes/wordpress-theme/img/business-areas-2.jpg" alt="">
+                                <a href="./business-area/ticket">通航售票</a>
                             </div>
                             <div class="col-md-4">
-                                <img src="./wp-content/themes/wordpress-theme/img/business-areas-3.png" alt="">
+                                <img src="./wp-content/themes/wordpress-theme/img/business-areas-3.jpg" alt="">
+                                <a href="./business-area/conter-uas">无人机反制</a>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div>更 多</div>
+                            <div><a href="./business-area">更 多</a></div>
                         </div>
                     </div>
                 </div>
@@ -84,11 +87,7 @@ get_header();
                             </div>
                             <div class="col-md-6 content">
                                 <div><?php echo $post->post_content; ?><div>
-										<?php 
-											$cat_name = '公司简介';
-											$cat_id = get_cat_ID( $cat_name );
-										?>
-                                        <div class="more"><a href="<?php echo get_category_link( $cat_id);?>">了解更多</a><span class="glyphicon glyphicon-plus"></span></div>
+                                        <div class="more"><a href="./company-profile">了解更多</a><span class="glyphicon glyphicon-plus"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +130,9 @@ get_header();
                                 </div>
                                 <?php foreach ( $latest_posts as $post ) : setup_postdata( $post ); ?>
                                 <div class="image">
+                                    <a class="link" href="<?php ( the_permalink() ) ?>">
                                     <?php the_post_thumbnail("medium");?>
+                                    </a>
                                 </div>
                                 <div class="content">
                                     <div class="title">
@@ -162,7 +163,9 @@ get_header();
                                     <?php echo $cat_name; ?>
                                 </div>
                                 <div class="image">
+                                    <a class="link" href="<?php ( the_permalink() ) ?>">
                                     <?php the_post_thumbnail("medium");?>
+                                    </a>
                                 </div>
                                 <div class="content">
                                     <div class="title">

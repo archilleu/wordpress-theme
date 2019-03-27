@@ -12,16 +12,12 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-<?php
-	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full')[0];
-?>
-    <img src="<?php echo $thumb ?>">
 	<header class="entry-header">
 		<?php the_title( sprintf( '<h3 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h3>' ); ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-		<?php the_excerpt(); ?>
+		<?php the_content(); ?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">

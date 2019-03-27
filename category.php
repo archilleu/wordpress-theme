@@ -21,6 +21,9 @@ get_header();
 if (in_category(array('news-trends'))) {
     // Load posts loop.
     get_template_part('template-parts/category/category', 'news-trends');
+} else if (in_category(array('human-resources'))) {
+    // Load posts loop.
+    get_template_part('template-parts/category/category', 'human-resources');
 } else {
     if (have_posts()) {
 
